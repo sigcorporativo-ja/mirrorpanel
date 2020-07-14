@@ -1,2 +1,2 @@
-# synchronizemaps
+# mirrorpanel
 Mapas sincronizados
