@@ -76,7 +76,7 @@ const map = M.map({
       y: 4493011.77,
    },
    projection: "EPSG:3857*m",
-   zoom: 15,
+   zoom: 8,
 });
 
 const mpMirrorPanel = new M.plugin.Mirrorpanel();
@@ -93,7 +93,7 @@ const map = M.map({
       y: 4493011.77,
    },
    projection: "EPSG:3857*m",
-   zoom: 15,
+   zoom: 8,
 });
 
 const mpMirrorPanel = new M.plugin.Mirrorpanel({
@@ -101,7 +101,6 @@ const mpMirrorPanel = new M.plugin.Mirrorpanel({
   collapsible: true,
   collapsed: false,
   modeViz: 0,
-  enabledPlugins: true,
   enabledKeyFunctions: true, 
   showCursors: true,
   defaultBaseLyrs: [
@@ -113,120 +112,3 @@ const mpMirrorPanel = new M.plugin.Mirrorpanel({
 
 map.addPlugin(mpMirrorPanel);
 ```
-
-## Ejemplo 2
-### Con plugin BackImgLayers
-
-```javascript
-const map = M.map({
-   container: 'mapjs',
-   center: {
-      x: -667143.31,
-      y: 4493011.77,
-   },
-   projection: "EPSG:3857*m",
-   zoom: 15,
-});
-
-let backImgLayerParams = {
-  position: 'TR',
-  collapsible: true,
-  collapsed: true,
-  layerId: 0,
-  layerVisibility: true,
-  layerOpts: [
-    {
-      id: 'mapa',
-      preview: 'http://componentes.ign.es/api-core/plugins/backimglayer/images/svqmapa.png',
-      title: 'Mapa',
-      layers: [new M.layer.WMTS({
-        url: 'http://www.ign.es/wmts/ign-base?',
-        name: 'IGNBaseTodo',
-        legend: 'Mapa IGN',
-        matrixSet: 'GoogleMapsCompatible',
-        transparent: false,
-        displayInLayerSwitcher: false,
-        queryable: false,
-        visible: true,
-        format: 'image/jpeg',
-      })],
-    },
-    {
-      id: 'imagen',
-      title: 'Imagen',
-      preview: 'http://componentes.ign.es/api-core/plugins/backimglayer/images/svqimagen.png',
-      layers: [new M.layer.WMTS({
-        url: 'http://www.ign.es/wmts/pnoa-ma?',
-        name: 'OI.OrthoimageCoverage',
-        legend: 'Imagen (PNOA)',
-        matrixSet: 'GoogleMapsCompatible',
-        transparent: false,
-        displayInLayerSwitcher: false,
-        queryable: false,
-        visible: true,
-        format: 'image/jpeg',
-      })],
-    },
-    {
-      id: 'raster',
-      preview: '../src/templates/img/svqmtn.png',
-      title: 'Ráster',
-      layers: [new M.layer.WMTS({
-        url: 'http://www.ign.es/wmts/mapa-raster?',
-        name: 'MTN',
-        legend: 'Mapa IGN',
-        matrixSet: 'GoogleMapsCompatible',
-        transparent: false,
-        displayInLayerSwitcher: false,
-        queryable: false,
-        visible: true,
-        format: 'image/jpeg',
-      })],
-    },
-    {
-      id: 'hibrido',
-      title: 'Híbrido',
-      preview: 'http://componentes.ign.es/api-core/plugins/backimglayer/images/svqhibrid.png',
-      layers: [new M.layer.WMTS({
-        url: 'http://www.ign.es/wmts/pnoa-ma?',
-        name: 'OI.OrthoimageCoverage',
-        legend: 'Imagen (PNOA)',
-        matrixSet: 'GoogleMapsCompatible',
-        transparent: true,
-        displayInLayerSwitcher: false,
-        queryable: false,
-        visible: true,
-        format: 'image/png',
-      }),
-      new M.layer.WMTS({
-        url: 'http://www.ign.es/wmts/ign-base?',
-        name: 'IGNBaseOrto',
-        matrixSet: 'GoogleMapsCompatible',
-        legend: 'Mapa IGN',
-        transparent: false,
-        displayInLayerSwitcher: false,
-        queryable: false,
-        visible: true,
-        format: 'image/png',
-      })
-      ],
-    },
-  ],
-}
-const mpBIL = new M.plugin.BackImgLayer(backImgLayerParams);
-map.addPlugin(mpBIL);
-
-const mpMirrorPanel = new M.plugin.Mirrorpanel({
-  position: 'TR',
-  collapsible: true,
-  collapsed: false,
-  modeViz: 0,
-  enabledPlugins: true,
-  enabledKeyFunctions: true,
-  showCursors: true,
-  backImgLayersParams: backImgLayerParams
-});
-
-map.addPlugin(mpMirrorPanel);
-```
-
