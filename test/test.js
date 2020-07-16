@@ -9,10 +9,18 @@ const map = M.map({
     x: -667143.31,
     y: 4493011.77,
   },
-  controls: ['scale', 'location'],
+  controls: ['scale', 'location', 'layerswitcher'],
   projection: "EPSG:3857*m",
   zoom: 8,
 });
+
+let capasPNOA = [
+  'WMS*PNOA 2015*https://www.ign.es/wms/pnoa-historico*PNOA2015',
+  'WMS*PNOA 2016*https://www.ign.es/wms/pnoa-historico*PNOA2016',
+  'WMS*PNOA 2017*https://www.ign.es/wms/pnoa-historico*PNOA2017',
+  'WMS*PNOA 2018*https://www.ign.es/wms/pnoa-historico*PNOA2018',
+];
+
 let defaultBaseLyrs = [
   new M.layer.WMTS({
     url: 'http://www.ign.es/wmts/ign-base?',
@@ -65,6 +73,7 @@ const mpMirrorPanel = new Mirrorpanel({
   collapsible: true, // El botón para desplegar/replegar el plugin no aparece (false) o sí aparece(true)
   collapsed: false, // El panel del plugin se muestra desplegado (false) o replegado (true)
   modeViz: 0,
+  mirrorLayers: capasPNOA,
   defaultBaseLyrs: defaultBaseLyrs, // Array de capas para los mapas espejo en formato StringAPICNIG
   enabledKeyFunctions: true, // Están habilitadas los comandos por teclado
   showCursors: true, // Se muestran los cursores

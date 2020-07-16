@@ -58,6 +58,11 @@
           "type": "boolean",
           "name": "interface",
           "position": 8
+        },
+        {
+          "type": "boolean",
+          "name": "showToc",
+          "position": 9
         }
       ]
     }

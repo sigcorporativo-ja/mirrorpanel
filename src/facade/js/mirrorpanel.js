@@ -137,6 +137,14 @@ export default class Mirrorpanel extends M.Plugin {
      */
     this.interface = options.interface === undefined ? true : options.interface;
 
+    /**
+    * Enabled layerswitcher control on mirrors 
+    * @type {boolean}
+    * @public
+    */
+    this.showTOC = options.showTOC;
+    if (this.showTOC === undefined) this.showTOC = true;
+
 
     /**
      *@private
@@ -172,6 +180,7 @@ export default class Mirrorpanel extends M.Plugin {
       showCursors: this.showCursors,
       mirrorLayers: this.mirrorLayers,
       defaultBaseLyrs: this.defaultBaseLyrs,
+      showTOC: this.showTOC
     };
 
     this.control_ = new MirrorpanelControl(values);
@@ -227,7 +236,7 @@ export default class Mirrorpanel extends M.Plugin {
     this.control_.removeMaps();
     this.control_.destroyMapsContainer();
     this.map_.removeControls([this.control_]);
-    [this.control_, this.panel_, this.map_, this.collapsible, this.collapsed, this.modeViz, this.enabledKeyFunctions, this.showCursors, this.mirrorLayers, this.defaultBaseLyrs, this.interface] = [null, null, null, null, null, null, null, null, null, null, null];
+    [this.control_, this.panel_, this.map_, this.collapsible, this.collapsed, this.modeViz, this.enabledKeyFunctions, this.showCursors, this.mirrorLayers, this.defaultBaseLyrs, this.interface, this.showTOC] = [null, null, null, null, null, null, null, null, null, null, null, null];
   }
 
   /**
@@ -260,7 +269,7 @@ export default class Mirrorpanel extends M.Plugin {
    * @api
    */
   getAPIRest() {
-    return `${this.name}=${this.position}*!${this.collapsed}*!${this.collapsible}*!${this.modeViz}*!${this.enabledKeyFunctions}*!${this.showCursors}*!${this.mirrorLayers}*!${this.defaultBaseLyrs}*!${this.interface}`;
+    return `${this.name}=${this.position}*!${this.collapsed}*!${this.collapsible}*!${this.modeViz}*!${this.enabledKeyFunctions}*!${this.showCursors}*!${this.mirrorLayers}*!${this.defaultBaseLyrs}*!${this.interface}*!${this.showTOC}`;
   }
 
   /**

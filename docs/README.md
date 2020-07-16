@@ -52,6 +52,8 @@ Plugin que permite comparar varias capas dividiendo la pantalla en varias partes
 
 - **interface**. Define si mostrar o no la interfaz del plugin.
 
+- **showTOC**. si es *true* mostrará el control layerswitcher en las capas espejo.
+
 # Eventos
 
 # Multi idioma

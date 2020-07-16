@@ -49,24 +49,9 @@ export default class MirrorpanelControl extends M.Control {
     /**
      * Defining mirror maps variables
      */
-    this.mapL = {
-      A: null,
-      B: null,
-      C: null,
-      D: null,
-    }
-    this.lyrCursor = {
-      A: null,
-      B: null,
-      C: null,
-      D: null,
-    }
-    this.featureLyrCursor = {
-      A: null,
-      B: null,
-      C: null,
-      D: null,
-    }
+    this.mapL = { A: null, B: null, C: null, D: null, }
+    this.lyrCursor = { A: null, B: null, C: null, D: null, }
+    this.featureLyrCursor = { A: null, B: null, C: null, D: null, }
 
     /**
      * Defining cursor style
@@ -99,6 +84,13 @@ export default class MirrorpanelControl extends M.Control {
      * @public {Array}
      */
     this.mirrorLayers = values.mirrorLayers;
+
+    /**
+     * Enable layerswitcher control
+     * @public
+     * @public {Array}
+     */
+    this.showTOC = values.showTOC;
 
     this.createMapContainers();
   }
@@ -134,7 +126,12 @@ export default class MirrorpanelControl extends M.Control {
     }
 
     this.mapL['A'] = map;
-
+    if (this.mirrorLayers.length > 0) {
+      this.mapL['A'].addLayers(this.mirrorLayers);
+      this.mapL['A'].getLayers().forEach((l) => {
+        if (l.zindex_ !== 0) { l.setVisible(false); }
+      });
+    }
     if (this.showCursors) { this.addLayerCursor('A'); }
     return new Promise((success, fail) => {
       let templateOptions = '';
@@ -300,6 +297,7 @@ export default class MirrorpanelControl extends M.Control {
     this.mapL[mapLyr] = M.map({
       container: 'mapjs' + mapLyr,
       layers: defLyr,
+      controls: this.showTOC ? ['layerswitcher'] : '',
       center: this.map_.getCenter(),
       projection: this.map_.getProjection().code + '*' + this.map_.getProjection().units,
       zoom: this.map_.getZoom(),
@@ -307,6 +305,12 @@ export default class MirrorpanelControl extends M.Control {
     this.mapL[mapLyr].getMapImpl().setView(this.map_.getMapImpl().getView());
 
     if (this.showCursors) { this.addLayerCursor(mapLyr); }
+    if (this.mirrorLayers.length > 0) {
+      this.mapL[mapLyr].addLayers(this.mirrorLayers);
+      this.mapL[mapLyr].getLayers().forEach((l) => {
+        if (l.zindex_ !== 0) { l.setVisible(false); }
+      });
+    }
     this.mapL[mapLyr].refresh();
   }
 
