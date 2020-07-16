@@ -1,2 +1,0 @@
-# mirrorpanel
-Mapas sincronizados
