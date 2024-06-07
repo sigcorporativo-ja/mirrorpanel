@@ -302,7 +302,9 @@ export default class MirrorpanelControl extends M.Control {
       projection: this.map_.getProjection().code + '*' + this.map_.getProjection().units,
       zoom: this.map_.getZoom(),
     });
-    this.mapL[mapLyr].getMapImpl().setView(this.map_.getMapImpl().getView());
+    setTimeout(() => {
+      this.mapL[mapLyr].getMapImpl().setView(this.map_.getMapImpl().getView());
+    }, 500);
 
     if (this.showCursors) { this.addLayerCursor(mapLyr); }
     if (this.mirrorLayers.length > 0) {
@@ -332,7 +334,10 @@ export default class MirrorpanelControl extends M.Control {
       },
     });
 
-    this.lyrCursor[mapLyr].addFeatures([this.featureLyrCursor[mapLyr]]);
+    setTimeout(() => {
+      this.lyrCursor[mapLyr].addFeatures([this.featureLyrCursor[mapLyr]]);
+    }, 2000);
+
     this.lyrCursor[mapLyr].setStyle(this.styleCursor);
     this.lyrCursor[mapLyr].setZIndex(5000);
     this.mapL[mapLyr].addLayers(this.lyrCursor[mapLyr]);
