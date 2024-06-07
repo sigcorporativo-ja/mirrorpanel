@@ -202,7 +202,7 @@ export default class MirrorpanelControl extends M.Control {
     bigContainer.classList.add('mirrorpanel-grid');
 
     const mapjsA = document.getElementById("mapjs") || document.getElementById("map");
-    document.body.insertBefore(bigContainer, mapjsA);
+    mapjsA.parentNode.insertBefore(bigContainer, mapjsA);
     mapjsA.classList.add('mirror1');
     bigContainer.appendChild(mapjsA);
 
@@ -386,7 +386,7 @@ export default class MirrorpanelControl extends M.Control {
     const mapjsA = document.getElementById("mapjs") || document.getElementById("map");
     mapjsA.style.display = "block";
     mapjsA.classList.remove('mirror1');
-    document.body.insertBefore(mapjsA, lienzo);
+    lienzo.parentNode.insertBefore(mapjsA, lienzo);
 
     // Load the main container
     document.getElementById("lienzo").remove();
