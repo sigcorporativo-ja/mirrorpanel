@@ -11,6 +11,18 @@
 	font-display: block;
 }
 
+/** Estilos herramienta*/
+
+#mapjs,
+#map {
+	height: 100% !important;
+	margin-top: 0px !important;
+}
+
+#lienzo {
+	height: 94.7vh;
+	margin-top: -1rem !important;
+}
 
 /** Estilos propios*/
 
